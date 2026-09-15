@@ -27,9 +27,12 @@ Aaron must buy the domain. Do not invent DNS. See `CNAME.example`.
 
 ## Docs
 
+- `DESIGN.md` — art direction, tokens, motion, sound (this pass)
+- `design/screens/` — 1440 / 390 captures (Figma equivalent)
+- `design/concepts/` — WebGL hero stills, labeled concept not brand
 - `PLAN.md` — IA, content TODOs, stack, pipeline, budget, risk
 - `APPS.md` — required / optional / banned tools
-- `DESIGN_PROMPT.md` — art direction
+- `DESIGN_PROMPT.md` — source brief
 - `inbox/` — drop real stills, reel, company name, personal email
 - `archive/kairos-profile/` — retired clinic-leaning static page
 

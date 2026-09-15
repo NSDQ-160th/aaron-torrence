@@ -110,15 +110,39 @@ function show(route: Route) {
   else engine?.setScene("work");
 }
 
+const dip = document.getElementById("dip");
+const iris = document.getElementById("iris");
+
 function go(href: string) {
   const url = href.startsWith("http") ? new URL(href) : new URL(href, window.location.origin);
   if (url.origin !== window.location.origin) {
     window.location.href = href;
     return;
   }
-  history.pushState({}, "", url.pathname);
-  show(parsePath(url.pathname));
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const next = () => {
+    history.pushState({}, "", url.pathname);
+    show(parsePath(url.pathname));
+    dip?.classList.remove("is-on");
+  };
+  if (reducedMotion) {
+    next();
+    return;
+  }
+  dip?.classList.add("is-on");
+  window.setTimeout(next, 180);
 }
+
+document.addEventListener("pointermove", (e) => {
+  if (!iris) return;
+  iris.style.left = `${e.clientX}px`;
+  iris.style.top = `${e.clientY}px`;
+});
+document.addEventListener("pointerover", (e) => {
+  const on = Boolean((e.target as HTMLElement | null)?.closest(".tile"));
+  iris?.classList.toggle("is-on", on);
+  document.body.classList.toggle("is-iris", on);
+});
 
 bindInternalLinks(go);
 window.addEventListener("popstate", () => show(parsePath(window.location.pathname)));
