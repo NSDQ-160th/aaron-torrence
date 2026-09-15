@@ -336,30 +336,27 @@ h1 span {
 }
 .portrait-frame {
   aspect-ratio: 4 / 5;
-  display: grid;
-  place-items: center;
   border-radius: 1.4rem;
   border: 1px solid color-mix(in srgb, var(--gold) 45%, transparent);
-  background:
-    radial-gradient(80% 70% at 50% 30%, rgba(232, 212, 139, 0.12), transparent 55%),
-    linear-gradient(180deg, #161922, #0c0e14);
+  background: #0c0e14;
   box-shadow: 0 30px 80px rgba(0, 0, 0, 0.35);
   position: relative;
   overflow: hidden;
 }
+.portrait-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 58% 22%;
+}
 .portrait-frame::before {
   content: "";
   position: absolute;
-  inset: 0.7rem;
+  inset: 0.55rem;
   border-radius: 1rem;
-  border: 1px solid rgba(232, 212, 139, 0.18);
-}
-.portrait-at {
-  font-family: var(--serif);
-  font-size: clamp(4.2rem, 8vw, 5.6rem);
-  letter-spacing: 0.04em;
-  color: var(--gold-soft);
-  line-height: 1;
+  border: 1px solid rgba(232, 212, 139, 0.28);
+  pointer-events: none;
+  z-index: 1;
 }
 .portrait figcaption {
   display: flex;

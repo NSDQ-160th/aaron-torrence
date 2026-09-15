@@ -29,13 +29,7 @@ Do not invent a hostname. When DNS is ready, copy `CNAME.example` to `CNAME` (si
 
 ## Portrait
 
-The hero uses an AT monogram until a real photo exists. Replace the `.portrait-frame` mark in `index.html` with:
-
-```html
-<img src="./aaron.jpg" alt="Aaron Torrence" />
-```
-
-Do not use a generated face.
+Hero photo is `aaron.jpg` (provided). The AT mark remains the favicon / nav monogram.
 
 ## Copy sources
 
