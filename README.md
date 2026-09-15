@@ -1,36 +1,40 @@
-# Aaron Torrence — profile site
+# Aaron Torrence — studio site
 
-Static personal site for Aaron Torrence, co-owner, operations lead, and health coach at [Kairos Rejuvenation](https://www.kairosrejuvenation.com).
+Personal site for **Aaron Torrence**: filmmaker, photographer, builder. Not a Kairos Rejuvenation landing page. Kairos is one venture chapter.
 
-Not hosted on Vercel. Drop this folder on **GitHub Pages**, **Cloudflare Pages**, or **Netlify**.
-
-## Preview locally
-
-From this folder:
+## Local
 
 ```bash
-python3 -m http.server 8080
+npm install
+npm run dev
 ```
 
-Then open [http://127.0.0.1:8080](http://127.0.0.1:8080).
+Open [http://127.0.0.1:5173](http://127.0.0.1:5173).
 
-## GitHub Pages (recommended first live URL)
+`npm run build` writes `dist/` for Cloudflare Pages.
 
-1. Repo → **Settings** → **Pages**
-2. Source: **Deploy from a branch**
-3. Branch: `main` / folder: `/ (root)`
-4. Save. Site will appear at `https://nsdq-160th.github.io/aaron-torrence/`
+## Host
 
-`.nojekyll` is included so Pages serves the files as-is. Canonical, Open Graph, and JSON-LD already use that GitHub Pages URL as the placeholder.
+**Cloudflare Pages** from this repo (`dist/` / Vite). Do not use Vercel. GitHub Pages is a last-resort fallback (weak for GLB/HDR).
 
-## Custom domain later
+Connect the GitHub repo in the Cloudflare dashboard, or:
 
-Do not invent a hostname. When DNS is ready, copy `CNAME.example` to `CNAME` (single hostname, no comments) and point the domain at Pages or Cloudflare.
+```bash
+npx wrangler pages deploy dist
+```
 
-## Portrait
+Aaron must buy the domain. Do not invent DNS. See `CNAME.example`.
 
-Hero photo is `aaron.jpg` (provided). The AT mark remains the favicon / nav monogram.
+## Docs
 
-## Copy sources
+- `PLAN.md` — IA, content TODOs, stack, pipeline, budget, risk
+- `APPS.md` — required / optional / banned tools
+- `DESIGN_PROMPT.md` — art direction
+- `inbox/` — drop real stills, reel, company name, personal email
+- `archive/kairos-profile/` — retired clinic-leaning static page
 
-Patient-facing coaching language matches the clinic site (`/medical#coaching` and `src/content/team.ts` on the Kairos marketing repo). Aaron is not presented as a prescribing clinician.
+## Stack
+
+Vite 5 · TypeScript · three r170 · GSAP + ScrollTrigger · Lenis. Vanilla Three, no Next.js.
+
+Portrait is the real `public/aaron.jpg`. Work titles stay labeled TODO until Aaron supplies credits. No generated face.
