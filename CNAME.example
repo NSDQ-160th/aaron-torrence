@@ -1,0 +1,7 @@
+# GitHub Pages custom domain (do not invent one).
+# When DNS is ready:
+# 1. Copy this file to CNAME (no extension, no comments — Pages wants a single hostname).
+# 2. Replace the line below with the real host, e.g. aaron.kairosrejuvenation.com
+# 3. Point that host at GitHub Pages per docs.github.com/pages/custom-domains
+#
+# example.yourdomain.com

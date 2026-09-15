@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="robots" content="noindex" />
+    <title>OG card</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;1,400&amp;family=DM+Sans:wght@500;600&amp;display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      html, body { margin: 0; }
+      .card {
+        width: 1200px;
+        height: 630px;
+        background:
+          radial-gradient(55% 70% at 82% 18%, rgba(52, 180, 244, 0.22), transparent 58%),
+          radial-gradient(40% 50% at 12% 88%, rgba(201, 162, 39, 0.16), transparent 50%),
+          linear-gradient(180deg, #090b10, #0d0f15);
+        color: #f7f3eb;
+        font-family: "DM Sans", system-ui, sans-serif;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 64px 72px 56px;
+        box-sizing: border-box;
+        position: relative;
+        overflow: hidden;
+      }
+      .mark {
+        width: 72px;
+        height: 72px;
+        border: 1px solid #c9a227;
+        border-radius: 16px;
+        display: grid;
+        place-items: center;
+        font-family: "Cormorant Garamond", Georgia, serif;
+        font-size: 28px;
+        color: #e8d48b;
+      }
+      h1 {
+        margin: 0;
+        font-family: "Cormorant Garamond", Georgia, serif;
+        font-size: 112px;
+        font-weight: 500;
+        line-height: 0.9;
+        letter-spacing: -0.03em;
+      }
+      h1 span {
+        display: block;
+        margin-top: 18px;
+        font-size: 36px;
+        font-style: italic;
+        color: #9aa3b5;
+        letter-spacing: 0;
+      }
+      .foot {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        color: #9aa3b5;
+        font-size: 22px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+      .gold { color: #e8d48b; }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <div class="mark">AT</div>
+      <div>
+        <h1>Aaron Torrence<span>Co-owner · Health coach</span></h1>
+      </div>
+      <div class="foot">
+        <span class="gold">Kairos Rejuvenation</span>
+        <span>Hagerstown, MD</span>
+      </div>
+    </div>
+  </body>
+</html>

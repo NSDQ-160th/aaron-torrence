@@ -6,11 +6,13 @@ Not hosted on Vercel. Drop this folder on **GitHub Pages**, **Cloudflare Pages**
 
 ## Preview locally
 
-Open `index.html` in a browser, or from this folder:
+From this folder:
 
 ```bash
 python3 -m http.server 8080
 ```
+
+Then open [http://127.0.0.1:8080](http://127.0.0.1:8080).
 
 ## GitHub Pages (recommended first live URL)
 
@@ -19,9 +21,21 @@ python3 -m http.server 8080
 3. Branch: `main` / folder: `/ (root)`
 4. Save. Site will appear at `https://nsdq-160th.github.io/aaron-torrence/`
 
+`.nojekyll` is included so Pages serves the files as-is. Canonical, Open Graph, and JSON-LD already use that GitHub Pages URL as the placeholder.
+
 ## Custom domain later
 
-Point `www` or a root domain at GitHub Pages or Cloudflare. Add a `CNAME` file in this repo if you use Pages.
+Do not invent a hostname. When DNS is ready, copy `CNAME.example` to `CNAME` (single hostname, no comments) and point the domain at Pages or Cloudflare.
+
+## Portrait
+
+The hero uses an AT monogram until a real photo exists. Replace the `.portrait-frame` mark in `index.html` with:
+
+```html
+<img src="./aaron.jpg" alt="Aaron Torrence" />
+```
+
+Do not use a generated face.
 
 ## Copy sources
 
