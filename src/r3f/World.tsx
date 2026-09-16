@@ -3,7 +3,7 @@ import { useFrame, useThree } from "@react-three/fiber";
 import { Environment, useTexture } from "@react-three/drei";
 import { EffectComposer, Bloom, Noise } from "@react-three/postprocessing";
 import { MeshBasicMaterial } from "three";
-import { Lens } from "./Lens";
+import { Delorean } from "./Delorean";
 import { params, poses, studio } from "./studio";
 
 function CameraRig({ orbit }: { orbit: boolean }) {
@@ -76,13 +76,14 @@ function LiveEffects() {
 export function World({ orbit = false }: { orbit?: boolean }) {
   return (
     <>
-      <ambientLight intensity={0.32} />
-      <directionalLight color="#ffb067" intensity={2.4} position={[-3.5, 2.4, 2.2]} />
-      <directionalLight color="#8ab4ff" intensity={1.6} position={[2.8, 0.8, -1.6]} />
-      <pointLight color="#ffc27a" intensity={2} distance={7} position={[0.45, 0.15, 1.2]} />
+      <ambientLight intensity={0.18} />
+      <directionalLight color="#ff3ad1" intensity={1.6} position={[-4, 3.2, 2]} />
+      <directionalLight color="#7cf0ff" intensity={2.2} position={[4, 2.4, -1]} />
+      <pointLight color="#7cf0ff" intensity={2.4} distance={10} position={[-3, 1.2, 2]} />
+      <pointLight color="#ff3ad1" intensity={1.8} distance={12} position={[3, 2, -3]} />
       <Suspense fallback={null}>
-        <Environment preset="studio" environmentIntensity={params.env} />
-        <Lens />
+        <Environment preset="night" environmentIntensity={params.env} />
+        <Delorean />
         {!orbit && <Stills />}
       </Suspense>
       <CameraRig orbit={orbit} />

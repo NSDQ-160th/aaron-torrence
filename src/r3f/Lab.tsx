@@ -8,7 +8,7 @@ import { params } from "./studio";
 
 export default function Lab() {
   useEffect(() => {
-    const pane = new Pane({ title: "Lens lab" }) as unknown as {
+    const pane = new Pane({ title: "DeLorean lab" }) as unknown as {
       addBinding: (target: object, key: string, opt?: Record<string, unknown>) => void;
       dispose: () => void;
     };
@@ -24,7 +24,7 @@ export default function Lab() {
 
   return (
     <Canvas
-      camera={{ fov: 32, position: [0, 0.2, 5.2] }}
+      camera={{ fov: 32, position: [-1.2, 1.2, 6.5] }}
       dpr={[1, 1.5]}
       gl={{ antialias: true, toneMapping: ACESFilmicToneMapping }}
     >

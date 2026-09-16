@@ -1,13 +1,13 @@
 export type SceneName = "hero" | "reel" | "work" | "approach" | "about" | "contact";
 
 export const params = {
-  bloom: 0.28,
+  bloom: 0.55,
   speed: 1,
   metalness: 1,
-  roughness: 0.28,
-  transmission: 1,
-  env: 0.55,
-  grain: 0.018,
+  roughness: 0.22,
+  transmission: 0.85,
+  env: 0.35,
+  grain: 0.02,
 };
 
 export const studio = {
@@ -16,10 +16,10 @@ export const studio = {
 };
 
 export const poses: Record<SceneName, { x: number; y: number; z: number; lookX: number; lookY: number }> = {
-  hero: { x: -0.35, y: 0.12, z: 3.45, lookX: 0.85, lookY: 0.04 },
-  reel: { x: -0.55, y: 0.06, z: 4.15, lookX: 0.5, lookY: 0 },
-  work: { x: 1.7, y: 0.22, z: 5.0, lookX: -0.15, lookY: 0.04 },
-  approach: { x: 0.4, y: 0.32, z: 4.5, lookX: 0.4, lookY: 0.06 },
-  about: { x: -1.05, y: 0.16, z: 4.7, lookX: 0.55, lookY: 0.03 },
-  contact: { x: 0.1, y: 0.04, z: 5.5, lookX: 0.4, lookY: 0 },
+  hero: { x: -1.6, y: 1.05, z: 6.6, lookX: 1.5, lookY: 1.05 },
+  reel: { x: -2.4, y: 1.2, z: 5.8, lookX: 0.2, lookY: 1.1 },
+  work: { x: 2.6, y: 1.4, z: 7.2, lookX: 0.8, lookY: 1.0 },
+  approach: { x: 0.1, y: 2.2, z: 8.4, lookX: 0.8, lookY: 0.8 },
+  about: { x: -2.8, y: 1.1, z: 4.6, lookX: 0.4, lookY: 1.0 },
+  contact: { x: 0.2, y: 1.6, z: 8.0, lookX: 0.9, lookY: 0.9 },
 };
