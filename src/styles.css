@@ -57,6 +57,20 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   height: 100%;
   pointer-events: none;
 }
+#stage canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+}
+body.is-lab #stage { pointer-events: auto; }
+body.is-lab .page,
+body.is-lab .nav,
+body.is-lab .scrim,
+body.is-lab .footer,
+body.is-lab .loader { display: none !important; }
+body.is-lab {
+  background: #07080c;
+}
 html.is-fallback #stage,
 html.is-reduced #stage { display: none; }
 

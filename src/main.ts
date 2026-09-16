@@ -6,6 +6,7 @@ import { about, approach, contact, kairosFootnote } from "./copy";
 import { works, selected, type Work } from "./work";
 import { bindInternalLinks, parsePath, viewId, type Route } from "./router";
 import type { Engine } from "./webgl/engine";
+import { studio } from "./r3f/studio";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -81,6 +82,10 @@ let lenis: Lenis | null = null;
 let homeTriggers: ScrollTrigger[] = [];
 
 function show(route: Route) {
+  if (route.name === "lab") {
+    window.location.assign("/lab");
+    return;
+  }
   const id = viewId(route);
   for (const v of views) {
     const el = document.getElementById(v);
@@ -134,6 +139,8 @@ function go(href: string) {
 }
 
 document.addEventListener("pointermove", (e) => {
+  studio.pointer.x = (e.clientX / window.innerWidth) * 2 - 1;
+  studio.pointer.y = (e.clientY / window.innerHeight) * 2 - 1;
   if (!iris) return;
   iris.style.left = `${e.clientX}px`;
   iris.style.top = `${e.clientY}px`;
@@ -164,17 +171,25 @@ const tickLoader = (done: boolean) => {
 async function boot() {
   const { canWebGL } = await import("./webgl/engine");
   const boot3d = canWebGL() && !reduced;
-  if (!boot3d) {
+  const stage = document.getElementById("stage");
+  if (!boot3d || !stage) {
     document.documentElement.classList.add("is-fallback");
     tickLoader(true);
     return;
   }
-  const [{ createEngine }, { bindScroll }] = await Promise.all([
-    import("./webgl/engine"),
+  const isLab = window.location.pathname.replace(/\/+$/, "") === "/lab";
+  if (isLab) {
+    document.body.classList.add("is-lab");
+    const { mountLab } = await import("./r3f/mount");
+    mountLab(stage);
+    tickLoader(true);
+    return;
+  }
+  const [{ mountStudio }, { bindScroll }] = await Promise.all([
+    import("./r3f/mount"),
     import("./webgl/scroll-map"),
   ]);
-  const canvas = document.getElementById("stage") as HTMLCanvasElement;
-  engine = createEngine(canvas);
+  engine = mountStudio(stage);
   lenis = new Lenis({ autoRaf: false });
   lenis.on("scroll", ScrollTrigger.update);
   homeTriggers = bindScroll(engine);

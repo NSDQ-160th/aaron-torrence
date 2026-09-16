@@ -3,11 +3,13 @@ export type Route =
   | { name: "work" }
   | { name: "about" }
   | { name: "contact" }
-  | { name: "case"; slug: string };
+  | { name: "case"; slug: string }
+  | { name: "lab" };
 
 export function parsePath(path: string): Route {
   const p = path.replace(/\/+$/, "") || "/";
   if (p === "/" || p === "") return { name: "home" };
+  if (p === "/lab") return { name: "lab" };
   if (p === "/work") return { name: "work" };
   if (p === "/about") return { name: "about" };
   if (p === "/contact") return { name: "contact" };

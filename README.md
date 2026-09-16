@@ -9,7 +9,7 @@ npm install
 npm run dev
 ```
 
-Open [http://127.0.0.1:5173](http://127.0.0.1:5173).
+Open [http://127.0.0.1:5173](http://127.0.0.1:5173). Lens lab (R3F + Tweakpane + orbit): [http://127.0.0.1:5173/lab](http://127.0.0.1:5173/lab).
 
 `npm run build` writes `dist/` for Cloudflare Pages.
 
