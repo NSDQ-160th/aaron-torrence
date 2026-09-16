@@ -1,17 +1,34 @@
+import { useEffect, useMemo, useState } from "react";
 import { Canvas } from "@react-three/fiber";
 import { ACESFilmicToneMapping } from "three";
 import { World } from "./World";
 import { poses } from "./studio";
+import { detectQuality } from "./quality";
 
 export default function StudioCanvas() {
   const hero = poses.hero;
+  const quality = useMemo(() => detectQuality(), []);
+  const [play, setPlay] = useState(true);
+
+  useEffect(() => {
+    const onVis = () => setPlay(document.visibilityState === "visible");
+    document.addEventListener("visibilitychange", onVis);
+    return () => document.removeEventListener("visibilitychange", onVis);
+  }, []);
+
   return (
     <Canvas
       camera={{ fov: 30, position: [hero.x, hero.y, hero.z] }}
-      dpr={[1, 1.5]}
-      gl={{ antialias: true, alpha: true, toneMapping: ACESFilmicToneMapping }}
+      dpr={quality.dpr}
+      frameloop={play ? "always" : "never"}
+      gl={{
+        antialias: quality.antialias,
+        alpha: true,
+        toneMapping: ACESFilmicToneMapping,
+        powerPreference: quality.low ? "low-power" : "high-performance",
+      }}
     >
-      <World />
+      <World quality={quality} />
     </Canvas>
   );
 }

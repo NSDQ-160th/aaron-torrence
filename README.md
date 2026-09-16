@@ -13,6 +13,12 @@ Open [http://127.0.0.1:5173](http://127.0.0.1:5173). Lens lab (R3F + Tweakpane +
 
 `npm run build` writes `dist/` for Cloudflare Pages.
 
+```bash
+npx wrangler pages deploy dist
+```
+
+Connect the GitHub repo in the Cloudflare dashboard (build command `npm run build`, output `dist`). Do not use Vercel.
+
 ## Host
 
 **Cloudflare Pages** from this repo (`dist/` / Vite). Do not use Vercel. GitHub Pages is a last-resort fallback (weak for GLB/HDR).

@@ -1,10 +1,10 @@
 import { Suspense, useRef } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
-import { Environment, useTexture } from "@react-three/drei";
+import { Environment } from "@react-three/drei";
 import { EffectComposer, Bloom, Noise } from "@react-three/postprocessing";
-import { MeshBasicMaterial } from "three";
 import { Delorean } from "./Delorean";
 import { params, poses, studio } from "./studio";
+import type { Quality } from "./quality";
 
 function CameraRig({ orbit }: { orbit: boolean }) {
   const { camera } = useThree();
@@ -19,61 +19,24 @@ function CameraRig({ orbit }: { orbit: boolean }) {
   return null;
 }
 
-function Stills() {
-  const maps = useTexture([
-    "/plates/study-lens.jpg",
-    "/plates/study-tungsten.jpg",
-    "/plates/study-leak.jpg",
-  ]);
-  const mats = useRef<(MeshBasicMaterial | null)[]>([]);
-  useFrame(() => {
-    const want = studio.scene === "work" || studio.scene === "reel" ? 0.88 : 0;
-    mats.current.forEach((m) => {
-      if (m) m.opacity += (want - m.opacity) * 0.045;
-    });
-  });
-  const places: [number, number, number][] = [
-    [-2.55, 0.55, -0.35],
-    [-2.1, -0.2, -0.75],
-    [-1.65, 0.9, -1.15],
-  ];
-  return (
-    <group>
-      {maps.map((map, i) => (
-        <mesh key={i} position={places[i]} rotation={[0, 0.2, 0]}>
-          <planeGeometry args={[1.4, 0.78]} />
-          <meshBasicMaterial
-            ref={(el) => {
-              mats.current[i] = el;
-            }}
-            map={map}
-            transparent
-            opacity={0}
-            toneMapped
-          />
-        </mesh>
-      ))}
-    </group>
-  );
-}
-
-function LiveEffects() {
-  const bloom = useRef<{ intensity: number } | null>(null);
+function LiveEffects({ bloom }: { bloom: boolean }) {
+  const bloomRef = useRef<{ intensity: number } | null>(null);
   const noise = useRef<{ opacity: number } | null>(null);
   useFrame(({ scene }) => {
-    if (bloom.current) bloom.current.intensity = params.bloom;
+    if (bloomRef.current) bloomRef.current.intensity = params.bloom;
     if (noise.current) noise.current.opacity = params.grain;
     scene.environmentIntensity = params.env;
   });
+  if (!bloom) return null;
   return (
     <EffectComposer>
-      <Bloom ref={bloom as never} intensity={params.bloom} luminanceThreshold={0.82} mipmapBlur />
+      <Bloom ref={bloomRef as never} intensity={params.bloom} luminanceThreshold={0.82} mipmapBlur />
       <Noise ref={noise as never} opacity={params.grain} />
     </EffectComposer>
   );
 }
 
-export function World({ orbit = false }: { orbit?: boolean }) {
+export function World({ orbit = false, quality }: { orbit?: boolean; quality: Quality }) {
   return (
     <>
       <ambientLight intensity={0.18} />
@@ -82,12 +45,11 @@ export function World({ orbit = false }: { orbit?: boolean }) {
       <pointLight color="#7cf0ff" intensity={2.4} distance={10} position={[-3, 1.2, 2]} />
       <pointLight color="#ff3ad1" intensity={1.8} distance={12} position={[3, 2, -3]} />
       <Suspense fallback={null}>
-        <Environment preset="night" environmentIntensity={params.env} />
-        <Delorean />
-        {!orbit && <Stills />}
+        {!quality.low && <Environment preset="night" environmentIntensity={params.env} />}
+        <Delorean quality={quality} />
       </Suspense>
       <CameraRig orbit={orbit} />
-      <LiveEffects />
+      <LiveEffects bloom={quality.bloom} />
     </>
   );
 }

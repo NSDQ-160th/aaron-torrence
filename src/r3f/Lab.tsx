@@ -5,6 +5,7 @@ import { ACESFilmicToneMapping } from "three";
 import { useEffect } from "react";
 import { World } from "./World";
 import { params } from "./studio";
+import { detectQuality } from "./quality";
 
 export default function Lab() {
   useEffect(() => {
@@ -22,13 +23,14 @@ export default function Lab() {
     return () => pane.dispose();
   }, []);
 
+  const quality = detectQuality();
   return (
     <Canvas
       camera={{ fov: 32, position: [-1.2, 1.2, 6.5] }}
-      dpr={[1, 1.5]}
-      gl={{ antialias: true, toneMapping: ACESFilmicToneMapping }}
+      dpr={quality.dpr}
+      gl={{ antialias: quality.antialias, toneMapping: ACESFilmicToneMapping }}
     >
-      <World orbit />
+      <World orbit quality={quality} />
       <OrbitControls enableDamping />
     </Canvas>
   );

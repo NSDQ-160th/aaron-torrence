@@ -96,7 +96,7 @@ Host: Cloudflare Pages from `dist/`. SPA fallback via `public/_redirects`. GitHu
 
 1. Full-viewport canvas under the DOM
 2. Scroll-linked camera: hero → work → about
-3. Signature object: analog lens (barrel + glass + aperture), custom material — not a stock torus
+3. Signature object: DeLorean stills in a neon volume (Aaron-supplied plates). Analog lens remains in `src/r3f/Lens.tsx` as a spare.
 4. Pointer: hover attract / parallax on nearby fragments
 5. Loader with progress; 3D first paint target < 3s on a laptop
 6. Mute control present; disabled until a real reel/cue exists
@@ -171,7 +171,7 @@ See `APPS.md`. Implement integrations only when needed. v1 uses GitHub, Node, Go
 6. About
 7. Contact
 8. Loader
-9. Perf pass
+9. Perf pass — adaptive quality, WebP plates, pause rAF when hidden, skip bloom/reflector on mobile
 
 ---
 
