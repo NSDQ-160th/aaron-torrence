@@ -11,9 +11,9 @@ function CameraRig({ orbit }: { orbit: boolean }) {
   useFrame(() => {
     if (orbit) return;
     const p = poses[studio.scene];
-    camera.position.x += (p.x + studio.pointer.x * 0.1 - camera.position.x) * 0.05;
-    camera.position.y += (p.y - camera.position.y) * 0.05;
-    camera.position.z += (p.z - camera.position.z) * 0.05;
+    camera.position.x += (p.x + studio.pointer.x * 0.08 - camera.position.x) * 0.032;
+    camera.position.y += (p.y - camera.position.y) * 0.032;
+    camera.position.z += (p.z - camera.position.z) * 0.032;
     camera.lookAt(p.lookX, p.lookY, 0);
   });
   return null;

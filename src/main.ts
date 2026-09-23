@@ -85,6 +85,7 @@ function show(route: Route) {
     window.location.assign("/lab");
     return;
   }
+  document.body.dataset.route = route.name;
   const id = viewId(route);
   for (const v of views) {
     const el = document.getElementById(v);
