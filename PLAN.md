@@ -72,9 +72,8 @@ src/router.ts              history API
 src/copy.ts                locked copy + TODO markers
 src/work.ts                work index data
 src/styles.css             fallback + overlay UI
-src/webgl/engine.ts        renderer, composer, rAF, DPR, visibility
-src/webgl/lens.ts          signature analog lens (code model → GLB later)
-src/webgl/materials.ts     glass / metal / grain shaders
+src/r3f/                   R3F canvas, DeLorean stage, /lab
+src/webgl/detect.ts        WebGL capability check
 src/webgl/scroll-map.ts    section → camera
 public/                    aaron.jpg, plates, favicon, _redirects
 ```

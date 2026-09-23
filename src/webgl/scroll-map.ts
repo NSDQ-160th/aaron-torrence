@@ -1,5 +1,5 @@
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import type { Engine, SceneName } from "./engine";
+import type { Engine, SceneName } from "../r3f/studio";
 
 const order: { id: string; scene: SceneName }[] = [
   { id: "hero", scene: "hero" },

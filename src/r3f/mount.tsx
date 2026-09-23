@@ -1,7 +1,6 @@
 import { createRoot, type Root } from "react-dom/client";
 import { StrictMode, type ReactNode } from "react";
-import type { Engine, SceneName } from "../webgl/engine";
-import { studio } from "./studio";
+import { studio, type Engine, type SceneName } from "./studio";
 import StudioCanvas from "./StudioCanvas";
 import Lab from "./Lab";
 

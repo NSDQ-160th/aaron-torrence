@@ -5,8 +5,7 @@ import Lenis from "lenis";
 import { about, approach, contact, kairosFootnote } from "./copy";
 import { works, selected, type Work } from "./work";
 import { bindInternalLinks, parsePath, viewId, type Route } from "./router";
-import type { Engine } from "./webgl/engine";
-import { studio } from "./r3f/studio";
+import { studio, type Engine } from "./r3f/studio";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -169,7 +168,7 @@ const tickLoader = (done: boolean) => {
 };
 
 async function boot() {
-  const { canWebGL } = await import("./webgl/engine");
+  const { canWebGL } = await import("./webgl/detect");
   const boot3d = canWebGL() && !reduced;
   const stage = document.getElementById("stage");
   if (!boot3d || !stage) {

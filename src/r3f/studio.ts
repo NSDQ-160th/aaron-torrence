@@ -1,5 +1,12 @@
 export type SceneName = "hero" | "reel" | "work" | "approach" | "about" | "contact";
 
+export type Engine = {
+  canvas: HTMLCanvasElement | null;
+  setScene: (name: SceneName) => void;
+  setProgress: (v: number) => void;
+  dispose: () => void;
+};
+
 export const params = {
   bloom: 0.55,
   speed: 1,
