@@ -318,6 +318,7 @@ h2 { font-size: clamp(2.1rem, 4vw, 3.4rem); margin: 0; line-height: 1.08; }
   overflow: hidden;
   background: #0a0c12;
 }
+.tile[hidden] { display: none !important; }
 .tile img {
   width: 100%;
   aspect-ratio: 2.39 / 1;
@@ -474,6 +475,43 @@ body[data-route="contact"] .nav-links a[href="/contact"] {
 .work-index .section-lede {
   text-shadow: 0 10px 40px rgba(7, 8, 12, 0.9);
 }
+.work-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin: 1.4rem 0 0;
+}
+.work-filters button {
+  min-height: 44px;
+  padding: 0 0.95rem;
+  border: 1px solid rgba(243, 238, 228, 0.16);
+  color: var(--fog);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-size: 0.68rem;
+  cursor: pointer;
+}
+.work-filters button[aria-pressed="true"] {
+  color: var(--bone);
+  border-color: color-mix(in srgb, var(--heat) 55%, transparent);
+}
+.work-filters button:hover,
+.work-filters button:focus-visible {
+  color: var(--bone);
+}
+.case-hero {
+  margin: 1.25rem 0 0;
+}
+.case-hero img {
+  width: 100%;
+  aspect-ratio: 2.39 / 1;
+  object-fit: cover;
+}
+.case-hero .copy-panel {
+  margin-top: 0;
+  max-width: 42rem;
+}
+.case-hero h1 { margin: 0.2rem 0 0.4rem; }
 .work-index .work-grid { grid-template-columns: 1fr; }
 @media (min-width: 800px) {
   .work-index .work-grid { grid-template-columns: 1.35fr 1fr; }

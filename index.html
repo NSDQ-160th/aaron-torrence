@@ -159,7 +159,14 @@
         <div class="wrap">
           <p class="eyebrow">Index</p>
           <h1>Work</h1>
-          <p class="section-lede">Film · Still · Media · Ventures. Empty slots are labeled, not invented.</p>
+          <p class="section-lede">Empty slots are labeled, not invented.</p>
+          <div class="work-filters" role="group" aria-label="Filter by lane">
+            <button type="button" data-lane="all" aria-pressed="true">All</button>
+            <button type="button" data-lane="film" aria-pressed="false">Film</button>
+            <button type="button" data-lane="still" aria-pressed="false">Still</button>
+            <button type="button" data-lane="media" aria-pressed="false">Media</button>
+            <button type="button" data-lane="ventures" aria-pressed="false">Ventures</button>
+          </div>
           <div class="work-grid" id="work-grid"></div>
         </div>
       </main>
@@ -193,7 +200,7 @@
     </div>
 
     <div id="view-case" class="page" hidden>
-      <main class="section">
+      <main class="section case-page">
         <div class="wrap" id="case-root"></div>
       </main>
     </div>

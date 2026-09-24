@@ -16,8 +16,9 @@ function tile(w: Work) {
   const kairos = w.slug === "kairos-rejuvenation";
   const href = w.status === "live" && w.href ? w.href : `/work/${w.slug}`;
   const ext = Boolean(w.href);
-  return `<a class="tile${w.status === "todo" ? " is-todo" : ""}${kairos ? " is-kairos" : ""}" href="${href}" ${ext ? 'target="_blank" rel="noopener"' : ""}>
-    <img src="${w.plate}" alt="" />
+  const alt = `${w.title}, ${w.lane}`;
+  return `<a class="tile${w.status === "todo" ? " is-todo" : ""}${kairos ? " is-kairos" : ""}" data-lane="${w.lane}" href="${href}" ${ext ? 'target="_blank" rel="noopener"' : ""}>
+    <img src="${w.plate}" alt="${alt}" />
     <div class="tile-body">
       <div class="tile-meta">${w.lane} · ${w.role} · ${w.year}</div>
       <h3>${w.title}</h3>
@@ -66,13 +67,30 @@ toggle?.addEventListener("click", () => {
   toggle.textContent = open ? "Close" : "Menu";
   document.body.classList.toggle("is-locked", Boolean(open));
 });
+function closeNav() {
+  nav?.classList.remove("is-open");
+  toggle?.setAttribute("aria-expanded", "false");
+  if (toggle) toggle.textContent = "Menu";
+  document.body.classList.remove("is-locked");
+}
 document.getElementById("nav-links")?.addEventListener("click", (e) => {
-  if ((e.target as HTMLElement).tagName === "A") {
-    nav?.classList.remove("is-open");
-    toggle?.setAttribute("aria-expanded", "false");
-    if (toggle) toggle.textContent = "Menu";
-    document.body.classList.remove("is-locked");
-  }
+  if ((e.target as HTMLElement).tagName === "A") closeNav();
+});
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") closeNav();
+});
+
+document.querySelectorAll(".work-filters button").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    const lane = (btn as HTMLButtonElement).dataset.lane ?? "all";
+    document.querySelectorAll(".work-filters button").forEach((b) => {
+      b.setAttribute("aria-pressed", b === btn ? "true" : "false");
+    });
+    document.querySelectorAll("#work-grid .tile").forEach((tileEl) => {
+      const show = lane === "all" || (tileEl as HTMLElement).dataset.lane === lane;
+      (tileEl as HTMLElement).hidden = !show;
+    });
+  });
 });
 
 const views = ["view-home", "view-work", "view-about", "view-contact", "view-case"];
@@ -96,14 +114,18 @@ function show(route: Route) {
     const root = document.getElementById("case-root");
     if (root) {
       root.innerHTML = item
-        ? `<p class="eyebrow">${item.lane}</p>
-           <h1>${item.title}</h1>
-           <p class="section-lede">${item.role} · ${item.year}</p>
-           <p>${item.blurb}</p>
-           <img src="${item.plate}" alt="" style="margin-top:1.5rem;max-width:48rem" />
-           <p class="todo" style="margin-top:1rem">TODO — Aaron: stills, reel cut, tools for this piece.</p>
-           <p><a href="/work">← Work</a></p>`
-        : `<h1>Not found</h1><p><a href="/work">Work</a></p>`;
+        ? `<p><a class="text-link" href="/work">← Work</a></p>
+           <figure class="case-hero">
+             <img src="${item.plate}" alt="${item.title}" />
+             <figcaption class="copy-panel">
+               <p class="eyebrow">${item.lane}</p>
+               <h1>${item.title}</h1>
+               <p class="section-lede">${item.role} · ${item.year}</p>
+               <p>${item.blurb}</p>
+               ${item.href ? `<p><a class="text-link" href="${item.href}" target="_blank" rel="noopener">Open project →</a></p>` : `<p class="todo">Stills and a cut will land here when Aaron supplies them.</p>`}
+             </figcaption>
+           </figure>`
+        : `<div class="copy-panel"><h1>Not found</h1><p><a class="text-link" href="/work">← Work</a></p></div>`;
     }
   }
   window.scrollTo(0, 0);
