@@ -4,8 +4,10 @@ import type { Engine, SceneName } from "../r3f/studio";
 const order: { id: string; scene: SceneName }[] = [
   { id: "hero", scene: "hero" },
   { id: "reel", scene: "reel" },
+  { id: "look", scene: "reel" },
   { id: "selected", scene: "work" },
   { id: "approach", scene: "approach" },
+  { id: "specs", scene: "about" },
   { id: "about", scene: "about" },
   { id: "contact", scene: "contact" },
 ];
