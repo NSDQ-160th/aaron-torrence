@@ -93,7 +93,7 @@
             <div class="reel-plate">
               <img src="/delorean/flux.webp" alt="" />
               <div class="reel-plate-inner">
-                <span class="play" aria-hidden="true"></span>
+                <span class="play-btn" aria-hidden="true"><span class="play"></span></span>
                 <strong>Reel forthcoming</strong>
                 <span>A cut will live in this frame</span>
               </div>
@@ -133,13 +133,12 @@
           </div>
         </section>
 
-        <section class="section" id="contact">
-          <div class="wrap copy-panel">
-            <p class="eyebrow">Contact</p>
-            <h2>Start with Aaron.</h2>
-            <div class="todo" id="email-todo"></div>
-            <aside class="footnote" id="kairos-foot"></aside>
-          </div>
+        <section class="section buy-band" id="contact">
+          <p class="eyebrow">Contact</p>
+          <h2>Start with Aaron.</h2>
+          <p class="section-lede" id="email-todo"></p>
+          <p><a class="pill pill-blue" href="/contact">Get in touch</a></p>
+          <aside class="footnote" id="kairos-foot"></aside>
         </section>
       </main>
     </div>
@@ -178,14 +177,12 @@
     </div>
 
     <div id="view-contact" class="page" hidden>
-      <main class="section">
-        <div class="wrap copy-panel">
-          <p class="eyebrow">Contact</p>
-          <h1>Start with Aaron.</h1>
-          <p class="section-lede" id="contact-note"></p>
-          <div class="todo" id="email-todo-2"></div>
-          <aside class="footnote" id="kairos-foot-2"></aside>
-        </div>
+      <main class="section buy-band">
+        <p class="eyebrow">Contact</p>
+        <h1>Start with Aaron.</h1>
+        <p class="section-lede" id="contact-note"></p>
+        <p class="todo" id="email-todo-2"></p>
+        <aside class="footnote" id="kairos-foot-2"></aside>
       </main>
     </div>
 
@@ -196,8 +193,15 @@
     </div>
 
     <footer class="footer">
-      <span>© <span id="year"></span> Aaron Torrence</span>
-      <span>Studio site — not a clinic landing page</span>
+      <div class="wrap footer-inner">
+        <p>© <span id="year"></span> Aaron Torrence. Studio site — not a clinic landing page.</p>
+        <nav aria-label="Footer">
+          <a href="/">Overview</a>
+          <a href="/work">Work</a>
+          <a href="/about">About</a>
+          <a href="/contact">Contact</a>
+        </nav>
+      </div>
     </footer>
     <script type="module" src="/src/main.ts"></script>
   </body>
