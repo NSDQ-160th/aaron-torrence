@@ -23,7 +23,7 @@ export const studio = {
 };
 
 export const poses: Record<SceneName, { x: number; y: number; z: number; lookX: number; lookY: number }> = {
-  hero: { x: -1.6, y: 1.05, z: 6.6, lookX: 1.5, lookY: 1.05 },
+  hero: { x: 0.15, y: 1.15, z: 7.1, lookX: 1.4, lookY: 1.15 },
   reel: { x: -2.4, y: 1.2, z: 5.8, lookX: 0.2, lookY: 1.1 },
   work: { x: 2.6, y: 1.4, z: 7.2, lookX: 0.8, lookY: 1.0 },
   approach: { x: 0.1, y: 2.2, z: 8.4, lookX: 0.8, lookY: 0.8 },
