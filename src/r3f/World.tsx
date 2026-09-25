@@ -1,20 +1,24 @@
-import { Suspense, useRef } from "react";
+import { useRef } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
-import { Environment } from "@react-three/drei";
+import { Color } from "three";
 import { EffectComposer, Bloom, Noise } from "@react-three/postprocessing";
-import { Delorean } from "./Delorean";
+import { Landscape } from "./Landscape";
 import { params, poses, studio } from "./studio";
 import type { Quality } from "./quality";
 
+const VOID = new Color("#181818");
+
 function CameraRig({ orbit }: { orbit: boolean }) {
-  const { camera } = useThree();
+  const { camera, scene } = useThree();
+
   useFrame(() => {
+    scene.background = VOID;
     if (orbit) return;
     const p = poses[studio.scene];
-    camera.position.x += (p.x + studio.pointer.x * 0.08 - camera.position.x) * 0.032;
-    camera.position.y += (p.y - camera.position.y) * 0.032;
-    camera.position.z += (p.z - camera.position.z) * 0.032;
-    camera.lookAt(p.lookX, p.lookY, 0);
+    camera.position.x += (p.x + studio.pointer.x * 1.6 - camera.position.x) * 0.028;
+    camera.position.y += (p.y - camera.position.y) * 0.028;
+    camera.position.z += (p.z + studio.pointer.y * 1.1 - camera.position.z) * 0.028;
+    camera.lookAt(p.lookX, p.lookY, p.lookZ);
   });
   return null;
 }
@@ -22,15 +26,14 @@ function CameraRig({ orbit }: { orbit: boolean }) {
 function LiveEffects({ bloom }: { bloom: boolean }) {
   const bloomRef = useRef<{ intensity: number } | null>(null);
   const noise = useRef<{ opacity: number } | null>(null);
-  useFrame(({ scene }) => {
+  useFrame(() => {
     if (bloomRef.current) bloomRef.current.intensity = params.bloom;
     if (noise.current) noise.current.opacity = params.grain;
-    scene.environmentIntensity = params.env;
   });
   if (!bloom) return null;
   return (
     <EffectComposer>
-      <Bloom ref={bloomRef as never} intensity={params.bloom} luminanceThreshold={0.82} mipmapBlur />
+      <Bloom ref={bloomRef as never} intensity={params.bloom} luminanceThreshold={0.88} mipmapBlur />
       <Noise ref={noise as never} opacity={params.grain} />
     </EffectComposer>
   );
@@ -39,15 +42,10 @@ function LiveEffects({ bloom }: { bloom: boolean }) {
 export function World({ orbit = false, quality }: { orbit?: boolean; quality: Quality }) {
   return (
     <>
-      <ambientLight intensity={0.18} />
-      <directionalLight color="#ff3ad1" intensity={1.6} position={[-4, 3.2, 2]} />
-      <directionalLight color="#7cf0ff" intensity={2.2} position={[4, 2.4, -1]} />
-      <pointLight color="#7cf0ff" intensity={2.4} distance={10} position={[-3, 1.2, 2]} />
-      <pointLight color="#ff3ad1" intensity={1.8} distance={12} position={[3, 2, -3]} />
-      <Suspense fallback={null}>
-        {!quality.low && <Environment preset="night" environmentIntensity={params.env} />}
-        <Delorean quality={quality} />
-      </Suspense>
+      <ambientLight intensity={0.42} color="#c8c4bc" />
+      <directionalLight color="#d8d2c6" intensity={0.55} position={[8, 22, 6]} />
+      <directionalLight color="#8a8e94" intensity={0.22} position={[-12, 10, -8]} />
+      <Landscape quality={quality} />
       <CameraRig orbit={orbit} />
       <LiveEffects bloom={quality.bloom} />
     </>

@@ -16,7 +16,7 @@ export function bindScroll(engine: Engine) {
   const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   if (reduced) return [];
 
-  return order
+  const scenes = order
     .map(({ id, scene }) => {
       const el = document.getElementById(id);
       if (!el) return null;
@@ -29,4 +29,25 @@ export function bindScroll(engine: Engine) {
       });
     })
     .filter((t): t is ScrollTrigger => t !== null);
+
+  const still = document.querySelector(".hero-still") as HTMLElement | null;
+  const hero = document.getElementById("hero");
+  if (still && hero) {
+    scenes.push(
+      ScrollTrigger.create({
+        trigger: hero,
+        start: "top top",
+        end: "bottom top",
+        scrub: 0.4,
+        onUpdate: (self) => {
+          still.style.opacity = String(1 - self.progress);
+        },
+        onRefresh: (self) => {
+          still.style.opacity = String(1 - self.progress);
+        },
+      })
+    );
+  }
+
+  return scenes;
 }

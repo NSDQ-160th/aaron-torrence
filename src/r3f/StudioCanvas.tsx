@@ -18,12 +18,12 @@ export default function StudioCanvas() {
 
   return (
     <Canvas
-      camera={{ fov: 30, position: [hero.x, hero.y, hero.z] }}
+      camera={{ fov: 38, position: [hero.x, hero.y, hero.z], far: 400 }}
       dpr={quality.dpr}
       frameloop={play ? "always" : "never"}
       gl={{
         antialias: quality.antialias,
-        alpha: true,
+        alpha: false,
         toneMapping: ACESFilmicToneMapping,
         powerPreference: quality.low ? "low-power" : "high-performance",
       }}

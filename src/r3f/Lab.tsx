@@ -9,16 +9,15 @@ import { detectQuality } from "./quality";
 
 export default function Lab() {
   useEffect(() => {
-    const pane = new Pane({ title: "DeLorean lab" }) as unknown as {
+    const pane = new Pane({ title: "Landscape lab" }) as unknown as {
       addBinding: (target: object, key: string, opt?: Record<string, unknown>) => void;
       dispose: () => void;
     };
-    pane.addBinding(params, "bloom", { min: 0, max: 2, step: 0.01 });
+    pane.addBinding(params, "bloom", { min: 0, max: 1, step: 0.01 });
     pane.addBinding(params, "speed", { min: 0, max: 3, step: 0.01 });
-    pane.addBinding(params, "metalness", { min: 0, max: 1, step: 0.01 });
-    pane.addBinding(params, "roughness", { min: 0, max: 1, step: 0.01 });
-    pane.addBinding(params, "transmission", { min: 0, max: 1, step: 0.01 });
-    pane.addBinding(params, "env", { min: 0, max: 2, step: 0.01 });
+    pane.addBinding(params, "contour", { min: 4, max: 36, step: 1 });
+    pane.addBinding(params, "fog", { min: 0, max: 0.08, step: 0.001 });
+    pane.addBinding(params, "relief", { min: 0.2, max: 3, step: 0.01 });
     pane.addBinding(params, "grain", { min: 0, max: 0.08, step: 0.001 });
     return () => pane.dispose();
   }, []);
@@ -26,9 +25,9 @@ export default function Lab() {
   const quality = detectQuality();
   return (
     <Canvas
-      camera={{ fov: 32, position: [-1.2, 1.2, 6.5] }}
+      camera={{ fov: 38, position: [12, 18, 16], far: 400 }}
       dpr={quality.dpr}
-      gl={{ antialias: quality.antialias, toneMapping: ACESFilmicToneMapping }}
+      gl={{ antialias: quality.antialias, alpha: false, toneMapping: ACESFilmicToneMapping }}
     >
       <World orbit quality={quality} />
       <OrbitControls enableDamping />

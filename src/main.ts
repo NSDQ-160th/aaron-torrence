@@ -131,6 +131,7 @@ function show(route: Route) {
   window.scrollTo(0, 0);
   lenis?.scrollTo(0, { immediate: true });
   ScrollTrigger.refresh();
+  requestAnimationFrame(syncNavTheme);
   if (route.name === "home") engine?.setScene("hero");
   else if (route.name === "about") engine?.setScene("about");
   else if (route.name === "contact") engine?.setScene("contact");
@@ -177,6 +178,19 @@ bindInternalLinks(go);
 window.addEventListener("popstate", () => show(parsePath(window.location.pathname)));
 show(parsePath(window.location.pathname));
 
+function syncNavTheme() {
+  if (!nav) return;
+  if (document.body.dataset.route !== "home") {
+    nav.classList.remove("is-light");
+    return;
+  }
+  const look = document.getElementById("look");
+  if (!look) return;
+  nav.classList.toggle("is-light", look.getBoundingClientRect().top <= 52);
+}
+window.addEventListener("scroll", syncNavTheme, { passive: true });
+syncNavTheme();
+
 const loader = document.getElementById("loader");
 const count = document.getElementById("loader-count");
 const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -213,7 +227,10 @@ async function boot() {
   ]);
   engine = mountStudio(stage);
   lenis = new Lenis({ autoRaf: false });
-  lenis.on("scroll", ScrollTrigger.update);
+  lenis.on("scroll", () => {
+    ScrollTrigger.update();
+    syncNavTheme();
+  });
   homeTriggers = bindScroll(engine);
   const loop = (time: number) => {
     lenis?.raf(time);
